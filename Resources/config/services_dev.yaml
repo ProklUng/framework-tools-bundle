@@ -1,0 +1,11 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  # Пример оформления подписчика. Название события = классу события.
+  Prokl\FrameworkExtensionBundle\Samples\SendEmailEventListener:
+    class: Prokl\FrameworkExtensionBundle\Samples\SendEmailEventListener
+    tags:
+      - { name: kernel.event_listener, event: Prokl\FrameworkExtensionBundle\Samples\SendEmailEvent, method: handle }
