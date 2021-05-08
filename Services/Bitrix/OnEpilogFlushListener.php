@@ -6,7 +6,7 @@ use Prokl\FrameworkExtensionBundle\Services\DelayedEvents\DelayedEventDispatcher
 
 /**
  * Class OnEpilogFlushListener
- * Запуск отложенных событий в самом конце жизненного цикла Битрикса.
+ * Запуск отложенных событий в самом конце жизненного цикла Битрикса или Wordpress.
  * @package Prokl\FrameworkExtensionBundle\Services\Bitrix
  *
  * @since 13.04.2021

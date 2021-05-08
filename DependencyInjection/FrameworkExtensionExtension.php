@@ -35,6 +35,10 @@ final class FrameworkExtensionExtension extends Extension
         if (defined('B_PROLOG_INCLUDED') && B_PROLOG_INCLUDED === true) {
             $loader->load('bitrix.yaml');
         }
+
+        if (defined('ABSPATH')) {
+            $loader->load('wordpress.yaml');
+        }
     }
 
     /**
