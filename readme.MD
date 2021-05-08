@@ -2,7 +2,18 @@
 
 ## Установка
 
-1) `composer require proklung/framework-tools-bundle`
+1) composer.json:
+
+```json
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/proklung/framework-tools-bundle"
+    }
+  ]
+```
+
+2) `composer require proklung/framework-tools-bundle`
 
 ## Детали
 
