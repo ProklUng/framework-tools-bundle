@@ -82,7 +82,7 @@ class DelayedEventDispatcher implements EventDispatcherInterface
     /**
      * @inheritdoc
      */
-    public function dispatch($event): object
+    public function dispatch($event, ?string $eventName = null): object
     {
         if ($this->shouldDelay($event)) {
             $this->queue[] = $event;
