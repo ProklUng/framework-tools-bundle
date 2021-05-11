@@ -12,7 +12,12 @@ services:
     tags:
       - { name: bitrix.events.init, module: main, event: OnEpilog, method: handle, sort: 0 }
 
-  Bitrix\Main\Data\Cache: ~
+  bitrix.cache.engine:
+    class: Bitrix\Main\Data\ICacheEngine
+    factory: ['Bitrix\Main\Data\Cache', 'createCacheEngine']
+
+  Bitrix\Main\Data\Cache:
+    arguments: ['@bitrix.cache.engine']
 
   # Простой PSR-16 кэшер.
   bitrix.simple.cacher:
