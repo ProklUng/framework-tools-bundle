@@ -83,7 +83,7 @@ class CacheClear extends Command
 
         // Весь кэш.
         if ($cacheType === 'all') {
-            if (!$this->rmDir($this->baseCacheDir, $output)) {
+            if (!$this->rmDir($this->baseCacheDir . '/', $output)) {
                 return 1;
             }
 
