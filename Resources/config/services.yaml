@@ -22,3 +22,6 @@ services:
   # Обработчик исключений по умолчанию.
   framework_extension_bundle.default_exception_handler:
     class: Prokl\FrameworkExtensionBundle\Services\DelayedEvents\DefaultDelayedEventExceptionHandler
+
+  framework_extension.filesystem:
+    class: Symfony\Component\Filesystem\Filesystem

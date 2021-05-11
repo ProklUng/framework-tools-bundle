@@ -11,3 +11,9 @@ services:
       - '@delayed.event.dispatcher'
     tags:
       - { name: 'custom.events.init', event: 'shutdown', type: 'add_action', method: 'handle', priority: 0 }
+
+  # Очистка кэша.
+  Prokl\FrameworkExtensionBundle\Commands\Wordpress\CacheClear:
+    arguments: ['@framework_extension.filesystem', '%kernel.cache_dir%']
+    tags:
+      - { name: console.command,  comand: cache:clear }

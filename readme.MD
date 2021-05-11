@@ -92,7 +92,7 @@ class ExampleRunner extends Command
 
 ### Консольные команды
 
-#### Очистка кэша
+#### Очистка кэша (Битрикс и Wordpress)
 
 ```bash
 php bin/console cache:clear 
