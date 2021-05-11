@@ -34,6 +34,6 @@
         "psr/cache": "^1.0",
         "psr/simple-cache": "^1.0",
         "doctrine/common": "^3.1",
-        "denismitr/translit": "^2.3"
+        "denismitr/translit": "~2 | ~3"
     }
 }
