@@ -87,10 +87,7 @@ class CacheClear extends Command
                 return 1;
             }
 
-            $this->filesystem->mkdir(
-                $this->baseCacheDir
-            );
-
+            $this->filesystem->mkdir($this->baseCacheDir);
             $this->filesystem->chmod($this->baseCacheDir, 0777);
 
 
