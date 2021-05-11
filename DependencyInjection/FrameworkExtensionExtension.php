@@ -31,6 +31,7 @@ final class FrameworkExtensionExtension extends Extension
 
         $loader->load('services.yaml');
         $loader->load('listeners.yaml');
+        $loader->load('commands.yaml');
 
         if (defined('B_PROLOG_INCLUDED') && B_PROLOG_INCLUDED === true) {
             $loader->load('bitrix.yaml');

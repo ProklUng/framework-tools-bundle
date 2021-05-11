@@ -23,3 +23,12 @@ services:
   bitrix.simple.cacher:
     class: Prokl\FrameworkExtensionBundle\Services\Bitrix\Psr16Cache\BitrixCacher
     arguments: ['@Bitrix\Main\Data\Cache']
+
+  ###########
+  # Команды
+  ##########
+
+  # Очистка кэша.
+  Prokl\FrameworkExtensionBundle\Commands\Bitrix\CacheClear:
+    tags:
+      - { name: console.command, command: cache:clear }
