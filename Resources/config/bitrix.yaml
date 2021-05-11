@@ -11,3 +11,10 @@ services:
       - '@delayed.event.dispatcher'
     tags:
       - { name: bitrix.events.init, module: main, event: OnEpilog, method: handle, sort: 0 }
+
+  Bitrix\Main\Data\Cache: ~
+
+  # Простой PSR-16 кэшер.
+  bitrix.simple.cacher:
+    class: Prokl\FrameworkExtensionBundle\Services\Bitrix\Psr16Cache\BitrixCacher
+    arguments: ['@Bitrix\Main\Data\Cache']
