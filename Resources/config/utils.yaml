@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  # Транслит.
+  Denismitr\Translit\Translit: ~
+
+  Prokl\FrameworkExtensionBundle\Services\TranslitService:
+    class: Prokl\FrameworkExtensionBundle\Services\TranslitService
+    arguments: ['@Denismitr\Translit\Translit']
+
+  Prokl\FrameworkExtensionBundle\Services\Contracts\TranslitInterface: '@Prokl\FrameworkExtensionBundle\Services\TranslitService'
