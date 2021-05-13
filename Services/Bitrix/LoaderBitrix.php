@@ -41,11 +41,10 @@ class LoaderBitrix
     /**
      * Initialize kernel of Bitrix.
      *
-     * @return int The status of readiness kernel.
+     * @return integer The status of readiness kernel.
      */
-    public function initializeBitrix()
+    public function initializeBitrix() : int
     {
-
         if ($this->bitrixStatus === static::BITRIX_STATUS_COMPLETE) {
             return static::BITRIX_STATUS_COMPLETE;
         } elseif (!$this->checkBitrix()) {
@@ -104,9 +103,9 @@ class LoaderBitrix
     /**
      * Checks readiness of Bitrix for kernel initialize.
      *
-     * @return bool
+     * @return boolean
      */
-    public function checkBitrix()
+    public function checkBitrix() : bool
     {
         if (!is_file($_SERVER['DOCUMENT_ROOT'] . '/bitrix/.settings.php')) {
             return false;
@@ -118,9 +117,9 @@ class LoaderBitrix
     /**
      * Gets Bitrix status.
      *
-     * @return int Value of constant `Application::BITRIX_STATUS_*`.
+     * @return integer Value of constant `Application::BITRIX_STATUS_*`.
      */
-    public function getBitrixStatus()
+    public function getBitrixStatus() : int
     {
         return $this->bitrixStatus;
     }
@@ -128,20 +127,21 @@ class LoaderBitrix
     /**
      * Checks that the Bitrix kernel is loaded.
      *
-     * @return bool
+     * @return boolean
      */
-    public function isBitrixLoaded()
+    public function isBitrixLoaded() : bool
     {
         return $this->bitrixStatus === static::BITRIX_STATUS_COMPLETE;
     }
-
 
     /**
      * Sets path to the document root of site.
      *
      * @param string $dir Path to document root.
+     *
+     * @return void
      */
-    public function setDocumentRoot($dir)
+    public function setDocumentRoot(string $dir) : void
     {
         $_SERVER['DOCUMENT_ROOT'] = $this->documentRoot = $dir;
     }
@@ -151,7 +151,7 @@ class LoaderBitrix
      *
      * @return null|string
      */
-    public function getDocumentRoot()
+    public function getDocumentRoot() : ?string
     {
         return $this->documentRoot;
     }

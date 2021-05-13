@@ -19,38 +19,60 @@ use Symfony\Component\Process\Process;
  */
 class CommandRunner
 {
-    /** @var integer */
-    protected $limit = 5;
+    /**
+     * @var integer $limit
+     */
+    private $limit = 5;
 
-    /** @var ArrayCollection|Process[] */
-    protected $openProcesses = [];
+    /**
+     * @var ArrayCollection $openProcesses
+     */
+    private $openProcesses;
 
-    /** @var bool */
-    protected $active = false;
+    /**
+     * @var boolean $active
+     */
+    private $active = false;
 
-    /** @var ArrayCollection|Process[] */
-    protected $activeProcesses;
+    /**
+     * @var ArrayCollection $activeProcesses
+     */
+    private $activeProcesses;
 
-    /** @var ArrayCollection|Process[] */
-    protected $completedProcesses;
+    /**
+     * @var ArrayCollection $completedProcesses
+     */
+    private $completedProcesses;
 
-    /** @var SymfonyStyle */
-    protected $io;
+    /**
+     * @var SymfonyStyle | null $io
+     */
+    private $io;
 
-    /** @var ProgressBar */
-    protected $progressBar;
+    /**
+     * @var ProgressBar|null $progressBar
+     */
+    private $progressBar;
 
-    /** @var string */
-    protected $binary;
+    /**
+     * @var string $binary
+     */
+    private $binary;
 
-    /** @var string */
-    protected $subPath;
+    /**
+     * @var string $subPath
+     */
+    private $subPath;
 
-    /** @var ArrayCollection */
-    protected $errors;
+    /**
+     * @var ArrayCollection $errors
+     */
+    private $errors;
 
-    /** @var boolean */
-    protected $continueOnError = true;
+    /**
+     * @var boolean $continueOnError
+     */
+    private $continueOnError = true;
 
     /**
      * CommandRunner constructor.
@@ -58,7 +80,7 @@ class CommandRunner
      * @param array       $processes
      * @param null|string $binary
      */
-    public function __construct(array $processes, $binary = null)
+    public function __construct(array $processes, ?string $binary = null)
     {
         $this->openProcesses = new ArrayCollection($processes);
         $this->activeProcesses = new ArrayCollection();
@@ -68,7 +90,7 @@ class CommandRunner
         $finder = new PhpExecutableFinder();
         $this->subPath = $_SERVER['PHP_SELF'] ?? $_SERVER['SCRIPT_NAME'] ?? $_SERVER['SCRIPT_FILENAME'];
         if ($binary === null) {
-            $this->setPhpBinary($finder->find());
+            $this->setPhpBinary((string)$finder->find());
         } else {
             $this->setBinary($binary);
         }
@@ -97,7 +119,6 @@ class CommandRunner
      */
     public static function lock(string $command, $lockName = ''): LockInterface
     {
-        # TODO: dont use flockstore if user doesnt want to use it.
         $store = new FlockStore();
         $factory = new LockFactory($store);
         $lock = $factory->createLock($command.$lockName, 0, true);
@@ -202,7 +223,9 @@ class CommandRunner
     public function setPhpBinary($binary): CommandRunner
     {
         if (!$binary) {
-            $this->io->error('Unable to find PHP binary.');
+            if ($this->io !== null) {
+                $this->io->error('Unable to find PHP binary.');
+            }
             exit(500);
         }
 
@@ -230,12 +253,14 @@ class CommandRunner
      */
     private function createProgressBar(): void
     {
-        $progressBar = $this->io->createProgressBar(count($this->openProcesses) * 2);
-        $progressBar->setFormat("%current%/%max% [%bar%] %percent:3s%% | %elapsed% \n%message%\n");
-        $progressBar->setBarCharacter('<fg=green>▓</>');
-        $progressBar->setEmptyBarCharacter('<fg=red>░</>');
-        $this->progressBar = $progressBar;
-        $this->progressBar->start();
+        if ($this->io !== null) {
+            $progressBar = $this->io->createProgressBar(count($this->openProcesses) * 2);
+            $progressBar->setFormat("%current%/%max% [%bar%] %percent:3s%% | %elapsed% \n%message%\n");
+            $progressBar->setBarCharacter('<fg=green>▓</>');
+            $progressBar->setEmptyBarCharacter('<fg=red>░</>');
+            $this->progressBar = $progressBar;
+            $this->progressBar->start();
+        }
     }
 
     /**
@@ -268,7 +293,7 @@ class CommandRunner
                 $this->progressBar->display();
             }
             $process->start();
-            $removed = $this->openProcesses->removeElement($orgiginProcess);
+            $this->openProcesses->removeElement($orgiginProcess);
 
             if ($this->progressBar) {
                 $this->progressBar->setProgress($this->progressBar->getProgress() + 1);
@@ -298,6 +323,10 @@ class CommandRunner
     {
         $activeProcesses = $this->activeProcesses;
 
+        /**
+         * @var string  $key
+         * @var Process $activeProcess
+         */
         foreach ($activeProcesses as $key => $activeProcess) {
             if (!$activeProcess->isRunning()) {
                 if ($activeProcess->getErrorOutput()) {
@@ -329,7 +358,10 @@ class CommandRunner
     {
         if (!$this->errors->isEmpty()) {
             foreach ($this->errors as $error) {
-                $this->io->warning($error);
+                if ($this->io !== null) {
+                    $this->io->warning($error);
+                }
+
             }
         }
 

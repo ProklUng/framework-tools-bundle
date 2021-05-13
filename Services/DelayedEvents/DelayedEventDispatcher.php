@@ -68,12 +68,15 @@ class DelayedEventDispatcher implements EventDispatcherInterface
     ) {
         $this->eventDispatcher = $eventDispatcher;
         $this->enabled = !$disabled;
-        $this->delayArbiter = $delayArbiter ?: static function () {
+
+        $this->delayArbiter = $delayArbiter ?: static function () : bool {
             return true;
         };
-        $this->exceptionHandler = $exceptionHandler ?: static function (Throwable $exception) {
+
+        $this->exceptionHandler = $exceptionHandler ?: static function (Throwable $exception) : void {
             throw $exception;
         };
+
         $this->flusher = $flusher ?: function (object $event): object {
             return $this->eventDispatcher->dispatch($event);
         };

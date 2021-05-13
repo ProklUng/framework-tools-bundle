@@ -39,7 +39,6 @@ class TranslitService implements TranslitInterface
      */
     public function transform(string $value) : string
     {
-        return $this->handler->forString($value)
-                             ->getSlug();
+        return (string)$this->handler->transform($value);
     }
 }

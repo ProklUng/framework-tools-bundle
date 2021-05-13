@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    allowStringToStandInForClass="true"
+    allowCoercionFromStringToClassConst="true"
+    findUnusedPsalmSuppress="true"
+    skipChecksOnUnresolvableIncludes="true"
+>
+    <plugins>
+        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
+        <pluginClass class="Psalm\MockeryPlugin\Plugin"/>
+    </plugins>
+    <projectFiles>
+        <directory name="/"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <file name="FrameworkExtensionBundle.php"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <MissingConstructor>
+            <errorLevel type="suppress">
+                <directory name="/"/>
+            </errorLevel>
+        </MissingConstructor>
+        <PropertyNotSetInConstructor>
+            <errorLevel type="suppress">
+                <directory name="/"/>
+            </errorLevel>
+        </PropertyNotSetInConstructor>
+        <InvalidGlobal>
+            <errorLevel type="suppress">
+                <directory name="/"/>
+            </errorLevel>
+        </InvalidGlobal>
+        <UnresolvableInclude>
+            <errorLevel type="suppress">
+                <directory name="/"/>
+            </errorLevel>
+        </UnresolvableInclude>
+        <ImplementedReturnTypeMismatch>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+            </errorLevel>
+        </ImplementedReturnTypeMismatch>
+        <UndefinedDocblockClass>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </UndefinedDocblockClass>
+        <UndefinedClass>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </UndefinedClass>
+        <UndefinedFunction>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </UndefinedFunction>
+        <MixedInferredReturnType>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedInferredReturnType>
+        <MixedPropertyAssignment>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedPropertyAssignment>
+        <MixedReturnStatement>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedReturnStatement>
+        <UndefinedConstant>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </UndefinedConstant>
+        <MixedAssignment>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedAssignment>
+        <MixedArgument>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedArgument>
+        <MixedArrayAccess>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedArrayAccess>
+        <MixedArrayAssignment>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedArrayAssignment>
+        <MixedOperand>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedOperand>
+        <MixedMethodCall>
+            <errorLevel type="suppress">
+                <directory name="Commands"/>
+                <file name="Services/Bitrix/Psr16Cache/BitrixCacher.php"/>
+                <file name="Services/Bitrix/LoaderBitrix.php"/>
+            </errorLevel>
+        </MixedMethodCall>
+    </issueHandlers>
+</psalm>
