@@ -15,9 +15,9 @@ use Throwable;
 class DefaultDelayedEventExceptionHandler
 {
     /**
-     * @param Throwable $error Исключение.
+     * @param Throwable   $error     Исключение.
      * @param string|null $eventName Название события.
-     * @param Event|null $event Payload события.
+     * @param Event|null  $event     Payload события.
      *
      * @return mixed
      * @throws Throwable

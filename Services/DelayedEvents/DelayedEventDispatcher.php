@@ -20,7 +20,7 @@ class DelayedEventDispatcher implements EventDispatcherInterface
     private $eventDispatcher;
 
     /**
-     * @var boolean
+     * @var boolean $enabled
      */
     private $enabled;
 
@@ -30,23 +30,23 @@ class DelayedEventDispatcher implements EventDispatcherInterface
     private $delayArbiter;
 
     /**
-     * @var callable
+     * @var callable $exceptionHandler
      */
     private $exceptionHandler;
 
     /**
-     * @var callable
+     * @var callable $flusher
      */
     private $flusher;
 
     /**
-     * @var object[]
+     * @var object[] $queue
      */
     private $queue = [];
 
     /**
      * @param EventDispatcherInterface $eventDispatcher
-     * @param boolean $disabled
+     * @param boolean                  $disabled
      * @param callable|null $delayArbiter The delay arbiter determines whether an event should be delayed or not. It's
      *     a callable with the following signature: `function($event, string $eventName = null): bool`. The
      *     default delay arbiter just returns `true`, all events are delayed. Note: The delay arbiter is only invoked
