@@ -121,4 +121,7 @@ php bin/console cache:clear
 - **set** - `set($key, $value, $ttl = null)`
 - **getOrSet** - `getOrSet(string $key, callable $callable, $ttl = null)`
 
+### Кастомные валидаторы для Symfony Validator
 
+- **Email** - при помощи `Egulias\EmailValidator`
+- **Phone** - при помощи `giggsey/libphonenumber-for-php`

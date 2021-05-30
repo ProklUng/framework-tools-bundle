@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  Prokl\FrameworkExtensionBundle\Services\Validators\PhoneValidator:
+    tags:
+      - { name: validator.constraint_validator }
+
+  Prokl\FrameworkExtensionBundle\Services\Validators\EmailValidator:
+    tags:
+      - { name: validator.constraint_validator }
