@@ -1,0 +1,54 @@
+##################
+# Context checker
+##################
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  # Инициализатор контекста.
+  framework_extension.wp_context_factory:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['Fedy\Services\Wordpress\Context', 'determine']
+
+  # Wordpress загружен? ABS_PATH
+  framework_extension.wp_is_core:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isCore']
+
+  framework_extension.wp_is_frontoffice:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isFrontoffice']
+
+  framework_extension.wp_is_backoffice:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isBackoffice']
+
+  framework_extension.wp_is_ajax:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isAjax']
+
+  framework_extension.wp_is_login:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isLogin']
+
+  framework_extension.wp_is_rest:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isRest']
+
+  framework_extension.wp_is_cron:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isCron']
+
+  framework_extension.wp_is_cli:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isWpCli']
+
+  framework_extension.wp_is_xmlrpc:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isXmlRpc']
+
+  framework_extension.wp_is_installing:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
+    factory: ['@framework_extension.wp_context_factory', 'isInstalling']

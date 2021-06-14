@@ -41,6 +41,7 @@ final class FrameworkExtensionExtension extends Extension
 
         if (defined('ABSPATH')) {
             $loader->load('wordpress.yaml');
+            $loader->load('context.yaml');
         }
     }
 
