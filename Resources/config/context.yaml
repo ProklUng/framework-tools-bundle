@@ -10,7 +10,7 @@ services:
   # Инициализатор контекста.
   framework_extension.wp_context_factory:
     class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Context
-    factory: ['Fedy\Services\Wordpress\Context', 'determine']
+    factory: ['Prokl\FrameworkExtensionBundle\Services\Wordpress\Context', 'determine']
 
   # Wordpress загружен? ABS_PATH
   framework_extension.wp_is_core:
