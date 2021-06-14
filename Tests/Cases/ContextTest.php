@@ -1,6 +1,6 @@
 <?php
 
-namespace Cases;
+namespace Prokl\FrameworkExtensionBundle\Tests\Cases;
 
 use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use PHPUnit\Framework\TestCase;

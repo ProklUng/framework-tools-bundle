@@ -39,7 +39,7 @@
         "doctrine/common": "^3.1",
         "denismitr/translit": "~3",
         "giggsey/libphonenumber-for-php": "^8.12",
-        "egulias/email-validator": "^3.1",
+        "egulias/email-validator": "^2 | ^3.1",
         "ext-json": "*"
     },
     "require-dev": {
