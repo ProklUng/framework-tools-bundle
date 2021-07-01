@@ -125,3 +125,8 @@ php bin/console cache:clear
 
 - **Email** - при помощи `Egulias\EmailValidator`
 - **Phone** - при помощи `giggsey/libphonenumber-for-php`
+
+### Вспомогательное для контроллеров
+
+- `BinaryFileResponseTrait` - метод `returnFile(string $file)` отдаст в браузер BinaryFileResponse файл $file,
+автоматом определив contentType.
