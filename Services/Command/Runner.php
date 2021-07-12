@@ -58,7 +58,7 @@ class Runner implements RunnerInterface
     }
 
     /**
-     * @param boolean $supressOutput  Запрет вывода на экран.
+     * {@inheritDoc}
      */
     public function setSupressOutput(bool $supressOutput): void
     {

@@ -22,4 +22,9 @@ interface RunnerInterface
      * @throws Exception
      */
     public function run(string $command, array $params = []) : string;
+
+    /**
+     * @param boolean $supressOutput Запрет вывода на экран.
+     */
+    public function setSupressOutput(bool $supressOutput): void;
 }
