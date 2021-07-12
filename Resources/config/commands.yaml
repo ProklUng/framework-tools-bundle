@@ -7,3 +7,5 @@ services:
   Prokl\FrameworkExtensionBundle\Services\Command\Runner:
     class: Prokl\FrameworkExtensionBundle\Services\Command\Runner
     arguments: ['@Symfony\Bundle\FrameworkBundle\Console\Application']
+
+  Prokl\FrameworkExtensionBundle\Services\Command\Contracts\RunnerInterface: '@Prokl\FrameworkExtensionBundle\Services\Command\Runner'

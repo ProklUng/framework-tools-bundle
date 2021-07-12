@@ -3,6 +3,7 @@
 namespace Prokl\FrameworkExtensionBundle\Services\Command;
 
 use Exception;
+use Prokl\FrameworkExtensionBundle\Services\Command\Contracts\RunnerInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Output\NullOutput;
  *
  * @since 12.07.2021
  */
-class Runner
+class Runner implements RunnerInterface
 {
     /**
      * @var Application $application Command application.
@@ -38,13 +39,7 @@ class Runner
     }
 
     /**
-     * Запустить команду.
-     *
-     * @param string $command Команда.
-     * @param array  $params  Параметры.
-     *
-     * @return string
-     * @throws Exception
+     * {@inheritDoc}
      */
     public function run(string $command, array $params = []) : string
     {
