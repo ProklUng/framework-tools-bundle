@@ -51,7 +51,7 @@ class BitrixSettingsDiAdapter
                 &&
                 is_callable($service['constructor'])
             ) {
-                $container->set($id, $service['constructor']());
+                $container->register($id, get_class($service['constructor']()))->setPublic(true);
                 continue;
             }
 
