@@ -4,3 +4,6 @@ services:
     autoconfigure: true
     public: true
 
+  Prokl\FrameworkExtensionBundle\Services\Command\Runner:
+    class: Prokl\FrameworkExtensionBundle\Services\Command\Runner
+    arguments: ['@Symfony\Bundle\FrameworkBundle\Console\Application']
