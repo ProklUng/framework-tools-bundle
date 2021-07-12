@@ -2,7 +2,9 @@
 
 namespace Prokl\FrameworkExtensionBundle\Services\Bitrix\Adapter;
 
+use Prokl\FrameworkExtensionBundle\Services\Utils\FactoryClosure;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\Definition;
 
 /**
  * Class BitrixSettingsDiAdapter
@@ -51,8 +53,11 @@ class BitrixSettingsDiAdapter
                 &&
                 is_callable($service['constructor'])
             ) {
-                $container->set($id, $service['constructor']());
-                continue;
+                /** @var Definition $definition */
+                $definition = $container->register($id, FactoryClosure::class);
+                $definition->setFactory([FactoryClosure::class, 'from']);
+                $definition->addArgument($service['constructor']);
+                $definition->setPublic(true);
             }
 
             if (array_key_exists('className', $service) && is_string($service['className'])) {
