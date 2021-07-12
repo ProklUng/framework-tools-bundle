@@ -27,4 +27,9 @@ interface RunnerInterface
      * @param boolean $supressOutput Запрет вывода на экран.
      */
     public function setSupressOutput(bool $supressOutput): void;
+
+    /**
+     * @param boolean $catch Перехватывать ли исключения.
+     */
+    public function setCatchExceptions(bool $catch): void;
 }
