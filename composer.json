@@ -18,10 +18,7 @@
         "psr-4": {
             "Prokl\\FrameworkExtensionBundle\\": "",
             "Prokl\\FrameworkExtensionBundle\\Tests\\": "Tests"
-        },
-        "exclude-from-classmap": [
-            "Tests/"
-        ]
+        }
     },
     "require": {
         "php": ">=7.3",
