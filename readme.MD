@@ -90,6 +90,40 @@ class ExampleRunner extends Command
 }
 ```
 
+### Lockable консольные команды
+
+Команды, запускающиеся одновременно только в одном экземпляре.
+
+```php
+use Prokl\FrameworkExtensionBundle\Services\Command\Lockable\AbstractLockableCommand;
+
+class SomeCommand extends AbstractLockableCommand
+{
+   protected function configure()
+   {
+       $this->setName('lock:command')
+            ->setDescription('Lock command')
+    
+       ;
+    
+       parent::configure();
+   }
+
+   protected function execute(InputInterface $input, OutputInterface $output) : int
+   {
+        $output->writeln('Start');
+        sleep(100);
+        $output->writeln('End');
+
+        return 0;
+   }
+}
+```
+
+Можно отнаследовать метод `getLockTtl()`, чтобы переопределить время блокировки (по умолчанию - 60 секунд).
+
+Зависимости такого сорта команд подцепляются через сеттеры посредством механизма autowiring.
+
 ### Консольные команды
 
 #### Очистка кэша (Битрикс и Wordpress)
