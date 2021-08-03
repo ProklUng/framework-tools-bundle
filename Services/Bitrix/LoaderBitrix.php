@@ -12,6 +12,8 @@ use Exception;
  *
  * @since 11.12.2020
  * @since 24.05.2021 Поиск DOCUMENT_ROOT, если его не задали снаружи.
+ * @since 03.08.2021 Подтягивание переменных окружения в $_SERVER. Реинициализация битриксового
+ * контекста.
  */
 class LoaderBitrix
 {
@@ -105,6 +107,18 @@ class LoaderBitrix
             $DBName, $DBDebug, $DBDebugToFile, $APPLICATION, $USER, $DBSQLServerType;
 
             require_once $this->documentRoot . '/bitrix/modules/main/include/prolog_before.php';
+
+
+            $_SERVER = array_merge($_SERVER, $_ENV);
+
+            // Реинициализация битриксового контекста с учетом подтянутого $_SERVER
+            $httpApp = \Bitrix\Main\Application::getInstance();
+            $context = $httpApp->getContext();
+
+            $server = new \Bitrix\Main\Server($_SERVER);
+            $request = new \Bitrix\Main\HttpRequest($server, $_GET ?? [], $_POST ?? [], $_FILES ?? [], $_COOKIE ?? []);
+            $context->initialize($request, $context->getResponse(), $server, ['env' => $_ENV]);
+            $httpApp->setContext($context);
 
             if (defined('B_PROLOG_INCLUDED') && B_PROLOG_INCLUDED === true) {
                 $this->bitrixStatus = static::BITRIX_STATUS_COMPLETE;
