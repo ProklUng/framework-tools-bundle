@@ -108,6 +108,14 @@ class LoaderBitrix
 
             require_once $this->documentRoot . '/bitrix/modules/main/include/prolog_before.php';
 
+            if (defined('B_PROLOG_INCLUDED') && B_PROLOG_INCLUDED === true) {
+                $this->bitrixStatus = static::BITRIX_STATUS_COMPLETE;
+            }
+
+            if (in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) === false) {
+                echo 'Warning: The console should be invoked via the CLI version of PHP, not the '
+                    . \PHP_SAPI . ' SAPI' . \PHP_EOL;
+            }
 
             $_SERVER = array_merge($_SERVER, $_ENV);
 
@@ -117,12 +125,9 @@ class LoaderBitrix
 
             $server = new \Bitrix\Main\Server($_SERVER);
             $request = new \Bitrix\Main\HttpRequest($server, $_GET ?? [], $_POST ?? [], $_FILES ?? [], $_COOKIE ?? []);
-            $context->initialize($request, $context->getResponse(), $server, ['env' => $_ENV]);
-            $httpApp->setContext($context);
 
-            if (defined('B_PROLOG_INCLUDED') && B_PROLOG_INCLUDED === true) {
-                $this->bitrixStatus = static::BITRIX_STATUS_COMPLETE;
-            }
+            $context->initialize($request, $context->getResponse(), $server);
+            $httpApp->setContext($context);
 
             // Альтернативный способ вывода ошибок типа "DB query error.":
             $GLOBALS['DB']->debug = true;
@@ -130,11 +135,6 @@ class LoaderBitrix
             $app = Application::getInstance();
             $con = $app->getConnection();
             $DB->db_Conn = $con->getResource();
-
-            if (in_array(\PHP_SAPI, ['cli', 'phpdbg', 'embed'], true) === false) {
-                echo 'Warning: The console should be invoked via the CLI version of PHP, not the '
-                    . \PHP_SAPI . ' SAPI' . \PHP_EOL;
-            }
         } catch (ConnectionException $e) {
             $this->bitrixStatus = static::BITRIX_STATUS_NO_DB_CONNECTION;
         }
