@@ -164,3 +164,18 @@ php bin/console cache:clear
 
 - `BinaryFileResponseTrait` - метод `returnFile(string $file)` отдаст в браузер BinaryFileResponse файл $file,
 автоматом определив contentType.
+
+
+### Отправка информации о фатальных ошибках через Symfony Notifier для Wordpress
+
+- Должна быть определена переменная среды `ADMIN_EMAIL`
+- Должен быть установлен пакет `symfony/notifier` и [бандл](https://github.com/ProklUng/core.framework.extension.bundle).
+Если нет, то соответствующие сервисы удаляются из контейнера при компиляции.
+- В корневом проекте должен быть класс-сервис, реализующий `Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\Contract\ErrorDbOperatorInterface`
+ для работы с записями в БД (в моем случае сохраняется md5 от сериализованного исключения).
+ 
+ - `save` - сохранить сведения об ошибке в базу (или куда там еще).
+ - `has` -  есть ли запись об этой ошибке в базе или нет.
+ - `clearTable` - очистить таблицу с данными об ошибках.
+ 
+- По умолчанию сообщения засылаются в каналы, отмеченные как `urgent`.

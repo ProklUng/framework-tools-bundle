@@ -24,6 +24,7 @@ services:
       - '@Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\Contract\ErrorDbOperatorInterface'
       - '%env(APP_ENV)%'
       - ['prod']
+      - 'urgent'
     tags:
       - { name: 'custom.events.init', event: 'wp_die_handler', method: 'handler', type: 'add_filter',  priority: 100 }
 

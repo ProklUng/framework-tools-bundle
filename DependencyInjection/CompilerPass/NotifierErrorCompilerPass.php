@@ -28,8 +28,7 @@ final class NotifierErrorCompilerPass implements CompilerPassInterface
 
         if (!$container->hasDefinition(ErrorDbOperatorInterface::class)
             &&
-            !$container->hasAlias(ErrorDbOperatorInterface::class))
-        {
+            !$container->hasAlias(ErrorDbOperatorInterface::class)) {
             $container->removeDefinition('console_command.clear_error_command');
             $container->removeDefinition('wp_error_notifier');
         }
