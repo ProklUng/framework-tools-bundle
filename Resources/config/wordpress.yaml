@@ -17,3 +17,8 @@ services:
     arguments: ['@framework_extension.filesystem', '%kernel.cache_dir%']
     tags:
       - { name: console.command,  comand: cache:clear }
+
+  # Лог SQL запросов через Monolog.
+  sql.logger.monolog:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Logger\WpSqlLogger
+    arguments: ['@wpdb', '@logger']

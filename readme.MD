@@ -189,3 +189,28 @@ php bin/console cache:clear
     decorates: 'logger'
     arguments: ['@.inner', '@wp_notificator']
 ```
+
+### Логгирование SQL запросов для Wordpress посредством Monolog
+
+Сервис `sql.logger.monolog`. Если в контейнере нет сервисов `wpdb` (экземпляр wpdb) и `logger` - логгер удаляется.
+
+В `wp-config.php`:
+
+```php
+define('SAVEQUERIES', true);
+```
+
+Но я сделал так (`SAVEQUERIES` в `.env` => 0 или 1):
+
+```php
+define('SAVEQUERIES', (bool)$_ENV['SAVEQUERIES'] ?? false);
+```
+
+Где-нибудь:
+
+```php
+$sql = container()->get('sql.logger.monolog');
+$sql->init();
+```
+
+Лог запросов упадет в обычный лог Монолога.

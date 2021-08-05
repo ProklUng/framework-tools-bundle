@@ -3,6 +3,7 @@
 namespace Prokl\FrameworkExtensionBundle;
 
 use Prokl\FrameworkExtensionBundle\DependencyInjection\CompilerPass\NotifierErrorCompilerPass;
+use Prokl\FrameworkExtensionBundle\DependencyInjection\CompilerPass\SqlLoggerCompilerPass;
 use Prokl\FrameworkExtensionBundle\DependencyInjection\FrameworkExtensionExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -35,5 +36,6 @@ final class FrameworkExtensionBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new NotifierErrorCompilerPass());
+        $container->addCompilerPass(new SqlLoggerCompilerPass());
     }
 }
