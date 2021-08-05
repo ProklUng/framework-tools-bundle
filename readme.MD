@@ -165,7 +165,6 @@ php bin/console cache:clear
 - `BinaryFileResponseTrait` - метод `returnFile(string $file)` отдаст в браузер BinaryFileResponse файл $file,
 автоматом определив contentType.
 
-
 ### Отправка информации о фатальных ошибках через Symfony Notifier для Wordpress
 
 - Должна быть определена переменная среды `ADMIN_EMAIL`
@@ -179,3 +178,14 @@ php bin/console cache:clear
  - `clearTable` - очистить таблицу с данными об ошибках.
  
 - По умолчанию сообщения засылаются в каналы, отмеченные как `urgent`.
+
+- Декорированный логгер.
+
+Конфиг основного проекта:
+
+```yaml
+  logger_notify_decorated:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Notifier\LoggerDecorator
+    decorates: 'logger'
+    arguments: ['@.inner', '@wp_notificator']
+```

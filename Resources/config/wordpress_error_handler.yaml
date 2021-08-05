@@ -10,12 +10,6 @@ services:
       - '@notifier'
       - '%env(resolve:ADMIN_EMAIL)%'
 
-  # Отправка логов по почте и в Телеграм.
-  logger_notify_decorated:
-    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Notifier\LoggerDecorator
-    decorates: 'logger'
-    arguments: ['@.inner', '@wp_notificator']
-
   # Обработчик события wp_die_handler
   wp_error_notifier:
     class: Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\ErrorEventHandler
