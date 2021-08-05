@@ -7,6 +7,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\Notifier\NotifierInterface;
+use Prokl\CustomFrameworkExtensionsBundle\Services\Notifier\Notification\TelegramConvertorNotification;
 
 /**
  * Class FrameworkExtensionExtension
@@ -42,6 +44,19 @@ final class FrameworkExtensionExtension extends Extension
         if (defined('ABSPATH')) {
             $loader->load('wordpress.yaml');
             $loader->load('context.yaml');
+
+            // Нотифайер ошибок.
+            if (interface_exists(NotifierInterface::class)
+                &&
+                class_exists(TelegramConvertorNotification::class)
+            ) {
+                $loader->load('wordpress_error_handler.yaml');
+
+                if (!array_key_exists('ADMIN_EMAIL', $_ENV)) {
+                    $defLogger = $container->findDefinition('logger_notify_decorated');
+                    $defLogger->replaceArgument(1, '');
+                }
+            }
         }
     }
 

@@ -2,7 +2,9 @@
 
 namespace Prokl\FrameworkExtensionBundle;
 
+use Prokl\FrameworkExtensionBundle\DependencyInjection\CompilerPass\NotifierErrorCompilerPass;
 use Prokl\FrameworkExtensionBundle\DependencyInjection\FrameworkExtensionExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -23,5 +25,15 @@ final class FrameworkExtensionBundle extends Bundle
         }
 
         return $this->extension;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new NotifierErrorCompilerPass());
     }
 }

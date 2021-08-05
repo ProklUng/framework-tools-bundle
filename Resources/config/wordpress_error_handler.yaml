@@ -1,0 +1,34 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
+
+  wp_notificator:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Notifier\Notificator
+    arguments:
+      - '@notifier'
+      - '%env(resolve:ADMIN_EMAIL)%'
+
+  # Отправка логов по почте и в Телеграм.
+  logger_notify_decorated:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\Notifier\LoggerDecorator
+    decorates: 'logger'
+    arguments: ['@.inner', '@wp_notificator']
+
+  # Обработчик события wp_die_handler
+  wp_error_notifier:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\ErrorEventHandler
+    arguments:
+      - '@wp_notificator'
+      - '@Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\Contract\ErrorDbOperatorInterface'
+      - '%env(APP_ENV)%'
+      - ['prod']
+    tags:
+      - { name: 'custom.events.init', event: 'wp_die_handler', method: 'handler', type: 'add_filter',  priority: 100 }
+
+  console_command.clear_error_command:
+    class: Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\ClearErrorCommand
+    arguments: ['@Prokl\FrameworkExtensionBundle\Services\Wordpress\ErrorHandler\Contract\ErrorDbOperatorInterface']
+    tags:
+      - { name: console.command, comand: fatal-error:clear }
