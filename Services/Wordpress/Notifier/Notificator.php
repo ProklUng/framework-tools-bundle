@@ -5,6 +5,7 @@ namespace Prokl\FrameworkExtensionBundle\Services\Wordpress\Notifier;
 use Prokl\CustomFrameworkExtensionsBundle\Services\Notifier\Notification\TelegramConvertorNotification;
 use Symfony\Component\Notifier\NotifierInterface;
 use Symfony\Component\Notifier\Recipient\Recipient;
+use Symfony\Component\Notifier\Exception\TransportException;
 
 /**
  * Class Notificator
@@ -37,9 +38,9 @@ class Notificator
     }
 
     /**
-     * @param string $title
-     * @param string $body
-     * @param string $importancy
+     * @param string $title      Title.
+     * @param string $body       Тело.
+     * @param string $importancy Важность.
      *
      * @return void
      */
@@ -52,6 +53,10 @@ class Notificator
             ->content($body)
             ->importance($importancy);
 
-        $this->notifier->send($notification, new Recipient($this->email));
+        try{
+            $this->notifier->send($notification, new Recipient($this->email));
+        } catch (TransportException $e) {
+            // Молчание - золото.
+        }
     }
 }
