@@ -15,6 +15,8 @@ use Symfony\Component\Notifier\Recipient\Recipient;
  * @package Prokl\FrameworkExtensionBundle\Tests\Cases\Notify
  *
  * @since 06.08.2021
+ *
+ * @coversDefaultClass Notificator
  */
 class NotificatorTest extends BaseTestCase
 {

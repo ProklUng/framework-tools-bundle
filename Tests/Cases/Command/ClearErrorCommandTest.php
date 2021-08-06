@@ -46,6 +46,7 @@ class ClearErrorCommandTest extends CommandTestCase
         $this->assertStringContainsString('Start clearing...', $result);
         $this->assertStringContainsString('Clearing complete...', $result);
     }
+
     /**
      * Мок ErrorDbOperatorInterface.
      *

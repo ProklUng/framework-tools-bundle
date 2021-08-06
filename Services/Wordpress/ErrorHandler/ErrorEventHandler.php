@@ -112,6 +112,9 @@ class ErrorEventHandler
             _default_wp_die_handler($errorData, $title, $args);
         }
 
-        die();
+        // Умирает только не под тестами.
+        if (!$this->isPhpUnitRunning) {
+            die();
+        }
     }
 }
