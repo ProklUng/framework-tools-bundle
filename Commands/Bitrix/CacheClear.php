@@ -126,6 +126,8 @@ class CacheClear extends Command
                     break;
             }
         }
+
+        return 0;
     }
 
     /**
