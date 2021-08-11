@@ -24,8 +24,7 @@ trait BinaryFileResponseTrait
      *
      * @return BinaryFileResponse
      *
-     * @throws InvalidArgumentException
-     * @throws LogicException
+     * @throws InvalidArgumentException | LogicException
      */
     protected function returnFile(string $file) : BinaryFileResponse
     {
