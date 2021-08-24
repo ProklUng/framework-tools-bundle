@@ -9,6 +9,13 @@ services:
 
   Prokl\FrameworkExtensionBundle\Services\TranslitService:
     class: Prokl\FrameworkExtensionBundle\Services\TranslitService
-    arguments: ['@Denismitr\Translit\Translit']
+    arguments: [ '@Denismitr\Translit\Translit' ]
 
   Prokl\FrameworkExtensionBundle\Services\Contracts\TranslitInterface: '@Prokl\FrameworkExtensionBundle\Services\TranslitService'
+
+  Prokl\FrameworkExtensionBundle\Services\Utils\Container\CallbackRunner:
+    class: Prokl\FrameworkExtensionBundle\Services\Utils\Container\CallbackRunner
+    calls:
+      - setContainer: [ '@service_container' ]
+
+  Prokl\FrameworkExtensionBundle\Services\Utils\Container\CallbackRunnerInterface: '@Prokl\FrameworkExtensionBundle\Services\Utils\Container\CallbackRunner'
